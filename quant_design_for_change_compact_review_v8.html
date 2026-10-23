@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+
+<html><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Designing Quant Systems for Change — Compact Review v3</title><style>
+:root{--blue:#0759A6;--blue2:#0C71C3;--navy:#17324D;--text:#33485D;--muted:#6E7F90;--line:#C8D9E8;--pale:#F3F8FC;--pale2:#E8F2FA;--red:#C83B36;--redpale:#FCF1F0;--white:#FFF;font-family:Arial,Helvetica,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;background:#EEF3F7;color:var(--text);height:100%;overflow:hidden}.toolbar{height:50px;background:#fff;border-bottom:1px solid #d7e1e9;display:flex;align-items:center;padding:0 18px;gap:8px}.toolbar .brand{font-weight:700;color:var(--navy);margin-right:auto}.btn{border:1px solid #b9cbd9;background:#fff;color:var(--navy);padding:7px 10px;font-size:12px;cursor:pointer}.btn:hover{background:#f2f6f9}.workspace{height:calc(100vh - 50px);display:flex;align-items:center;justify-content:center;gap:14px;padding:12px}.stage{width:min(calc((100vh - 84px)*16/9),calc(100vw - 40px));aspect-ratio:16/9;background:#fff;border:1px solid #c9d6e2;position:relative;overflow:hidden}.slide{position:absolute;inset:0;display:none}.slide.active{display:block}.slide-inner{height:100%;padding:2.7% 3.4% 1.7%;display:flex;flex-direction:column}.slide-header{display:flex;justify-content:space-between;align-items:center;height:22px}.section{font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--blue);text-transform:uppercase}.num{font-size:11px;color:var(--muted)}h1{margin:10px 0 4px;font-size:34px;line-height:1.08;color:var(--blue);font-weight:700;letter-spacing:-.02em}.subtitle{font-size:17px;color:var(--muted);margin:0 0 12px}.content{flex:1;display:flex;flex-direction:column;justify-content:center;gap:14px;font-size:16px;line-height:1.36;min-height:0}.footer-line{height:2px;background:var(--blue);margin-top:10px}.two-cols,.three-cols{display:grid;gap:18px}.two-cols{grid-template-columns:1fr 1fr}.three-cols{grid-template-columns:repeat(3,1fr)}.compact{gap:14px}.card{border:1px solid var(--line);background:var(--pale);padding:16px 17px;min-height:116px}.card.emphasis{background:var(--pale2);border-color:#A9CBE4}.card.warning{background:var(--redpale);border-color:#E4B8B4}.card-title{font-size:20px;font-weight:700;color:var(--navy);margin-bottom:9px}.card p{margin:0}.label{font-size:10px;letter-spacing:.12em;color:var(--muted);font-weight:700;margin-bottom:8px}.metric{font-size:34px;color:var(--blue);font-weight:700;margin-bottom:5px}.takeaway{background:#EAF4FB;border-left:5px solid var(--blue);padding:12px 16px;color:var(--navy);font-weight:700}.question{border-top:1px solid var(--line);padding-top:12px;color:var(--navy);font-size:18px;font-weight:700}.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:center}.big-statement{font-size:29px;line-height:1.16;color:var(--blue);font-weight:700}.bullet-panel{border-left:2px solid var(--line);padding-left:22px}.bullet-panel p{margin:9px 0}.principle-row{display:grid;grid-template-columns:1fr 42px 1fr 42px 1fr;align-items:stretch}.principle{background:var(--pale);border:1px solid var(--line);padding:17px}.principle b{display:block;color:var(--navy);font-size:18px;margin-bottom:7px}.principle span{font-size:14px}.arrow,.conn{display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:25px;font-weight:700}table{width:100%;border-collapse:collapse;font-size:14px}th{background:#EAF4FB;color:var(--navy);font-weight:700;text-align:left;padding:10px 12px;border:1px solid var(--line)}td{padding:10px 12px;border:1px solid var(--line);vertical-align:top}.muted{color:var(--muted);font-size:12px}.graph{display:flex;align-items:center;justify-content:center}.node,.op{background:#fff;border:2px solid var(--blue);padding:18px 16px;min-width:120px;text-align:center;color:var(--navy);font-weight:700}.bad-graph .node{border-color:#8598AA}.boundary-diagram{display:grid;grid-template-columns:1fr .85fr 1.2fr .85fr 1fr;gap:12px;align-items:center}.variant-stack{display:grid;gap:7px}.mini,.variant{border:1px solid #9EC4E0;background:#F7FBFE;padding:10px;text-align:center}.boundary{border:2px solid var(--blue);padding:16px 10px;text-align:center;font-weight:700;color:var(--navy)}.core{background:#EAF4FB;border:1px solid var(--line);padding:28px 12px;text-align:center;font-weight:700}.family{display:flex;flex-direction:column;align-items:center;gap:12px}.common{width:50%;text-align:center;background:#EAF4FB;border:1px solid var(--line);padding:12px;font-weight:700}.branch{display:flex;gap:20px}.variant{min-width:150px}.two-level{display:grid;grid-template-columns:1fr 1fr;gap:20px}.level{border:1px solid var(--line);background:var(--pale);padding:22px}.level-title{color:var(--blue);font-size:22px;font-weight:700;margin-bottom:12px}.level-line{font-size:18px}.workflow-row{display:flex;align-items:center;justify-content:center}.op{min-width:130px}.note-strip{color:var(--muted);font-size:14px;text-align:center}.definition-grid,.contexts,.four-values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.def,.context,.value{border:1px solid var(--line);background:var(--pale);padding:16px}.def b,.context b,.value b{display:block;color:var(--navy);font-size:18px;margin-bottom:8px}.def span,.context span,.value span{font-size:14px}.contrast{display:grid;grid-template-columns:1fr 1fr;gap:20px}.compat{display:grid;grid-template-columns:1fr 80px 1fr;gap:14px;align-items:center}.item{border:1px solid var(--line);background:var(--pale);padding:24px;text-align:center;color:var(--navy);font-weight:700;font-size:20px}.item span{display:block;font-size:13px;color:var(--muted);font-weight:400;margin-top:8px}.cases{align-items:stretch}.case{border-top:4px solid var(--blue);background:var(--pale);padding:16px;border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.case-cost{font-weight:700;color:var(--navy);font-size:19px}.case b{color:var(--blue)}.test-flow{display:grid;grid-template-columns:1fr 60px 1fr 60px 1.2fr;gap:10px;align-items:center}.test-box{border:2px solid var(--blue);padding:22px;text-align:center;font-weight:700;color:var(--navy)}.variant-col{display:grid;gap:7px}.variant-col span{background:var(--pale);border:1px solid var(--line);padding:9px;text-align:center}.drivers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.driver{border:1px solid var(--line);background:var(--pale);padding:14px;text-align:center;font-weight:700}.down{text-align:center;color:var(--blue);font-size:26px}.wide-boundary,.wide-core{width:66%;align-self:center;text-align:center;padding:13px;border:2px solid var(--blue);font-weight:700;color:var(--navy)}.wide-core{background:#EAF4FB;border:1px solid var(--line)}.xp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.xp{border:1px solid var(--line);background:var(--pale);padding:14px}.xp b{display:block;color:var(--navy);font-size:18px}.xp span{font-size:14px}.stamina{display:grid;grid-template-columns:145px 1fr;gap:9px 16px;align-items:center}.curve-label{font-weight:700;color:var(--navy)}.curve-label.second{margin-top:9px}.bar{height:28px;display:flex;align-items:center;padding:0 10px;color:white;font-size:13px}.bar.short{width:48%;background:#5E9CCC}.bar.long{width:78%;background:#1B6CAD}.bar.red{background:#C56B66;width:88%}.bar.blue{background:#2F82BA;width:42%}.stage-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.ai-stage{border:1px solid var(--line);background:var(--pale);padding:17px;text-align:center}.ai-stage.active{border:2px solid var(--blue);background:#EAF4FB}.ai-stage b{display:block;color:var(--navy);font-size:20px}.ai-stage span{display:block;font-size:13px;color:var(--muted);margin-top:6px}.four-values{grid-template-columns:1fr 1fr}.conclusion .value{min-height:106px}.closing{font-size:22px;text-align:center;color:var(--blue);font-weight:700;margin-top:8px}.refs{font-size:13px;line-height:1.28}.refs p{margin:7px 0}.cover-grid{display:grid;grid-template-columns:1.6fr .8fr;gap:38px;align-items:center}.eyebrow{font-size:12px;letter-spacing:.15em;color:var(--blue);font-weight:700;margin-bottom:20px}.cover-sub{font-size:29px;line-height:1.2;color:var(--navy);max-width:820px}.cover-box{border:2px solid var(--blue);padding:20px;background:var(--pale)}.cover-box b{font-size:18px;color:var(--blue)}.cover-box p{margin-bottom:0}.notes-pane{width:420px;height:min(82vh,760px);background:#fff;border:1px solid #cad8e3;display:none;flex-direction:column}.show-notes .notes-pane{display:flex}.notes-head{padding:12px 14px;border-bottom:1px solid #d6e1ea}.notes-head b{color:var(--navy)}.notes-body{padding:14px 16px;overflow:auto;font-size:14px;line-height:1.45}.notes-body p{margin:0 0 13px}.overview{position:fixed;inset:50px 0 0;background:#f1f5f8;display:none;overflow:auto;padding:24px;z-index:20}.overview.open{display:block}.overview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}.ov{background:white;border:1px solid #c7d5e1;padding:12px;cursor:pointer}.ov b{color:var(--blue)}
+@media(max-width:900px){.workspace{align-items:flex-start;overflow:auto}.stage{width:100%;min-width:760px}.notes-pane{display:none!important}.toolbar .brand{display:none}}
+@media print{.toolbar,.notes-pane,.overview{display:none!important}.workspace{padding:0;height:auto}.stage{width:13.333in;height:7.5in;border:0}.slide{position:relative;display:block!important;page-break-after:always;height:7.5in}.slide-inner{padding:.35in .45in .25in}}
+
+.failure-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch}.failure-card{border:1px solid var(--line);background:#fff;padding:15px 16px;display:flex;flex-direction:column;min-height:285px}.failure-issue{color:var(--navy);font-size:17px;line-height:1.22;font-weight:700;min-height:63px}.failure-name{color:var(--muted);font-size:12.5px;font-weight:700;margin:4px 0 8px}.failure-label{font-size:9.5px;letter-spacing:.12em;color:var(--red);font-weight:800;margin:1px 0 3px}.failure-label.lesson-label{color:var(--blue);margin-top:13px}.failure-text{font-size:12.25px;line-height:1.27;color:var(--text)}.lineage td:first-child{width:34%}.lineage td{line-height:1.28}
+
+.history-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;align-content:center}
+.history-item{display:grid;grid-template-columns:62px 1fr;gap:12px;border:1px solid #d5e1ec;background:#fff;padding:9px 11px;min-height:82px;align-items:start}
+.history-year{font-size:18px;font-weight:800;color:#1a5fd0;line-height:1.1;padding-top:1px}
+.history-item b{display:block;font-size:16px;color:#163c75;margin-bottom:4px}
+.history-item span{display:block;font-size:12.4px;line-height:1.27;color:#4f6074}
+.business-remodel{display:flex;align-items:stretch;gap:12px}
+.remodel-step{flex:1;border:1px solid #d5e1ec;background:#f7fbff;padding:16px 17px;min-height:142px}
+.remodel-step b{display:block;color:#163c75;font-size:19px;margin-bottom:10px}
+.remodel-step span{display:block;color:#4f6074;font-size:15px;line-height:1.4}
+.three-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.failure-grid.detailed{align-items:stretch}
+.failure-grid.detailed .failure-card{padding:12px 14px}
+.failure-grid.detailed .failure-issue{font-size:17px;line-height:1.22;min-height:44px}
+.failure-grid.detailed .failure-name{font-size:13px;margin:4px 0 9px}
+.failure-grid.detailed .failure-label{font-size:10px;margin-top:7px}
+.failure-grid.detailed .failure-text{font-size:12px;line-height:1.28}
+
+.workflow-compare{display:grid;grid-template-columns:.82fr 1.18fr;gap:18px;align-items:stretch}.workflow-panel{border:1px solid var(--line);background:#fff;padding:15px 16px;display:flex;flex-direction:column;min-height:430px}.workflow-panel.bad{background:#F8FAFC}.workflow-panel.good{background:#F7FBFE;border-color:#A9CBE4}.panel-title{font-size:21px;font-weight:700;color:var(--navy);margin-bottom:4px}.panel-sub{font-size:13px;color:var(--muted);line-height:1.3;margin-bottom:10px}.flow-col{display:flex;flex-direction:column;align-items:stretch;gap:5px;flex:1}.flow-box{border:1.5px solid #8AA0B3;background:#fff;padding:8px 11px;text-align:left;color:var(--navy);font-weight:700;font-size:14px;line-height:1.22}.flow-box.bad{border-color:#A2AFBB;background:#fff}.flow-box.core{border:2px solid var(--blue);background:#fff}.flow-box.soft{border-color:#9EC4E0;background:#EAF4FB}.flow-box span{display:block;color:var(--muted);font-weight:400;font-size:11px;margin-top:3px}.flow-arrow{color:var(--blue);font-size:19px;text-align:center;line-height:1}.coupling-note{border-top:1px solid var(--line);margin-top:9px;padding-top:8px;font-size:12px;color:#74433F}.vary-note{border-top:1px solid var(--line);margin-top:9px;padding-top:8px;font-size:12px;color:var(--navy)}.mini-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.mini-tag{border:1px solid #B9CFDF;background:#fff;padding:4px 6px;font-size:10px;color:var(--navy)}
+
+
+/* v8: coupled-workflow intro + reusable relative-value structure */
+.coupled-layout{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;align-items:stretch}.coupled-main{min-height:404px}.compact-flow .flow-box{padding:7px 10px}.coupled-side{border:1px solid var(--line);background:var(--pale);padding:15px 16px;display:flex;flex-direction:column;gap:8px}.coupled-choice{background:#fff;border:1px solid #B9CCDC;padding:10px 11px}.coupled-choice b{display:block;color:var(--navy);font-size:14px;margin-bottom:3px}.coupled-choice span{display:block;color:var(--muted);font-size:11px;line-height:1.25}
+.rv-content{gap:10px!important}.rv-pipeline{display:grid;grid-template-columns:1.15fr 24px 1fr 24px 1fr 24px .82fr 24px 1.05fr 24px .9fr;align-items:stretch}.rv-node{border:1.3px solid #A9C6DF;background:var(--pale);min-height:86px;padding:9px}.rv-node.rv-core{background:#EDF5FF;border-color:#78A6D4}.rv-node.rv-intent{background:#FFF7F5;border-color:#DFAAA5}.rv-tag{font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);font-weight:700;margin-bottom:4px}.rv-node b{display:block;font-size:13px;color:var(--navy);line-height:1.14;margin-bottom:4px}.rv-node span{display:block;font-size:9.5px;line-height:1.25;color:#52667B}.rv-arrow{display:flex;align-items:center;justify-content:center;color:#7797B8;font-size:20px;font-weight:700}.rv-examples-title{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--blue);font-weight:700;margin-top:2px}.rv-examples{display:grid;grid-template-columns:1fr 1fr;gap:8px}.rv-ex{border:1px solid #CBDBEA;background:#FBFDFF;padding:8px 10px;min-height:82px}.rv-ex>b{display:block;font-size:12.5px;color:var(--navy);margin-bottom:5px}.rv-ex span{display:block;font-size:9.4px;line-height:1.2;color:#4D6278;margin:1px 0}.rv-ex strong{display:inline-block;color:var(--blue);font-size:8.2px;text-transform:uppercase;letter-spacing:.04em;min-width:56px}
+</style><style>
+.case-subtitle{font-size:19px;color:var(--muted);font-weight:700;margin-top:-4px;margin-bottom:2px}
+.case-story{border:1px solid var(--line);background:#fff}
+.case-row{display:grid;grid-template-columns:92px 1fr;border-bottom:1px solid var(--line);min-height:76px}
+.case-row:last-child{border-bottom:0}.case-row-label{background:var(--pale);color:var(--blue);font-size:11px;font-weight:800;letter-spacing:.12em;padding:18px 14px;display:flex;align-items:flex-start}.case-row-text{padding:16px 18px;font-size:17px;line-height:1.34;color:var(--text)}
+.case-row.cost .case-row-label{background:#F4F6F8;color:#5C6875}.case-row.lesson .case-row-label{background:#EAF4FB;color:var(--navy)}
+.compact-subtitle{margin-bottom:2px;font-size:15px}.stamina-table{font-size:16px}.stamina-table th{font-size:15px;padding:12px 14px}.stamina-table td{padding:16px 14px;line-height:1.32}.stamina-table td:first-child{font-weight:700;color:var(--navy);width:24%}
+.stage-row{gap:10px;align-items:stretch}.ai-stage{padding:14px 12px;text-align:left;min-height:178px}.ai-stage b{font-size:18px;text-align:left}.ai-stage .stage-name{font-size:13px;color:var(--navy);font-weight:700;margin:5px 0 10px}.stage-details{border-top:1px solid var(--line);padding-top:9px;font-size:11.5px;line-height:1.35;color:var(--text)}.stage-details div{margin:4px 0}
+
+.workflow-compare{display:grid;grid-template-columns:.82fr 1.18fr;gap:18px;align-items:stretch}.workflow-panel{border:1px solid var(--line);background:#fff;padding:15px 16px;display:flex;flex-direction:column;min-height:430px}.workflow-panel.bad{background:#F8FAFC}.workflow-panel.good{background:#F7FBFE;border-color:#A9CBE4}.panel-title{font-size:21px;font-weight:700;color:var(--navy);margin-bottom:4px}.panel-sub{font-size:13px;color:var(--muted);line-height:1.3;margin-bottom:10px}.flow-col{display:flex;flex-direction:column;align-items:stretch;gap:5px;flex:1}.flow-box{border:1.5px solid #8AA0B3;background:#fff;padding:8px 11px;text-align:left;color:var(--navy);font-weight:700;font-size:14px;line-height:1.22}.flow-box.bad{border-color:#A2AFBB;background:#fff}.flow-box.core{border:2px solid var(--blue);background:#fff}.flow-box.soft{border-color:#9EC4E0;background:#EAF4FB}.flow-box span{display:block;color:var(--muted);font-weight:400;font-size:11px;margin-top:3px}.flow-arrow{color:var(--blue);font-size:19px;text-align:center;line-height:1}.coupling-note{border-top:1px solid var(--line);margin-top:9px;padding-top:8px;font-size:12px;color:#74433F}.vary-note{border-top:1px solid var(--line);margin-top:9px;padding-top:8px;font-size:12px;color:var(--navy)}.mini-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.mini-tag{border:1px solid #B9CFDF;background:#fff;padding:4px 6px;font-size:10px;color:var(--navy)}
+</style></head><body>
+<div class="toolbar"><div class="brand">Designing Quant Systems for Change · Compact Review v3</div><button class="btn" id="prev">←</button><span id="count"></span><button class="btn" id="next">→</button><button class="btn" id="notes">Speaker notes</button><button class="btn" id="overviewBtn">Overview</button></div>
+<div class="workspace"><div class="stage"><section class="slide" data-title="Designing Quant Systems for Change">
+<div class="slide-inner">
+<div class="slide-header"><div class="section"></div><div class="num">01 / 34</div></div>
+<h1>Designing Quant Systems for Change</h1>
+<div class="content">
+<div class="cover-grid">
+<div>
+<div class="eyebrow">QUANTITATIVE RESEARCH · SYSTEM ARCHITECTURE · BUSINESS WORKFLOW</div>
+<div class="cover-sub">Architecture and business workflow design for continuous, risk-controlled experimentation</div>
+</div>
+<div class="cover-box">
+<b>Core idea</b>
+<p>Keep likely changes local. Keep business definitions dependable. Make testing part of the design.</p>
+</div>
+</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>In systematic trading, we rarely know in advance which research ideas will make money. We therefore need to run many disciplined experiments, learn quickly, discard weak ideas, and move promising ones towards production under appropriate controls.</p><p>This talk is about the software and business-workflow design that helps us preserve that ability as systems grow. The central idea is simple: keep the parts that are likely to change behind dependable boundaries; keep the business concepts and operations used across those boundaries clear and stable enough to avoid ambiguity; and design testing into those same boundaries.</p><p>I will also connect these ideas to several long-running themes in software engineering—information hiding, program families, protected variations, seams, domain language, evolutionary design—and then ask how their value changes as AI coding tools take on more implementation and review.</p></aside>
+</section><section class="slide" data-title="Research agility is a competitive capability">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">01 · WHY AGILITY MATTERS</div><div class="num">02 / 34</div></div>
+<h1>Research agility is a competitive capability</h1>
+<div class="content">
+<div class="three-cols">
+<div class="card"><div class="card-title">Uncertain ideas</div><p>We cannot know in advance which research hypotheses will survive contact with data and markets.</p></div>
+<div class="card"><div class="card-title">Repeated experiments</div><p>Value comes from trying, measuring, learning and moving on—not from protecting every first idea.</p></div>
+<div class="card"><div class="card-title">Fast, controlled turnaround</div><p>The useful metric is time from idea to trustworthy evidence, and then to safe production when justified.</p></div>
+</div>
+<div class="takeaway">Architecture matters because it changes the cost and safety of the next experiment.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>Agility is not a generic virtue here. It is closely tied to the economics of systematic trading. We work under uncertainty. A good hypothesis can fail; an unfashionable one can work; and something that works today may need to adapt as markets evolve.</p><p>So we need a research process that supports repeated, risk-controlled trial and error. The goal is not simply to write code quickly. It is to shorten the path from a research question to trustworthy evidence, and then, when the evidence is strong enough, to reliable production behaviour.</p><p>This is why the design of our research systems matters. A design that makes every new experiment require extensive integration, detective work or regression effort directly slows the business's ability to learn.</p></aside>
+</section><section class="slide" data-title="The first implementation is often much simpler than the later change">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">01 · WHY AGILITY MATTERS</div><div class="num">03 / 34</div></div>
+<h1>The first implementation is often much simpler than the later change</h1>
+<div class="content">
+<div class="two-cols">
+<div class="card emphasis"><div class="label">FIRST IMPLEMENTATION</div><div class="metric">2 days</div><div class="card-title">Limited scope and few existing dependencies</div><p>One data source, one model, a clear objective and a relatively simple graph.</p></div>
+<div class="card"><div class="label">SIX MONTHS LATER</div><div class="metric">2 weeks</div><div class="card-title">A small change to an established system</div><p>Existing assumptions, connected components, regression risk and accumulated special cases now matter.</p></div>
+</div>
+<div class="question">How do we keep future changes manageable without making the first experiment unnecessarily heavy?</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>The first version of a research idea is often structurally simple. We are not necessarily more focused as people; the system itself has fewer existing relationships to respect. There may be one venue, one model, a small set of inputs and a straightforward graph.</p><p>Months later, the same area may have accumulated other users, shared state, additional data sources and special handling. A small feature can then require much more time than the original implementation.</p><p>The two-day and two-week figures are illustrative. The point is the shape of the problem: the cost of change can rise faster than the apparent size of the change. Our objective is not to eliminate all upfront speed. It is to prevent repeated experiments from becoming progressively harder.</p></aside>
+</section><section class="slide" data-title="The hidden cost is the experiment we decide not to run">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">01 · WHY AGILITY MATTERS</div><div class="num">04 / 34</div></div>
+<h1>The hidden cost is the experiment we decide not to run</h1>
+<div class="content">
+<div class="split">
+<div class="big-statement">A difficult change costs more than engineering time.</div>
+<div class="bullet-panel">
+<p>• A researcher drops an idea because the change looks too invasive.</p>
+<p>• A useful comparison is postponed because the simulator setup is too fragile.</p>
+<p>• A strategy stays unchanged because no one wants to reopen a tightly coupled graph.</p>
+</div>
+</div>
+<div class="takeaway">Friction changes which research questions we are willing to ask.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>The direct engineering cost is only part of the loss. If changing a system is unpleasant, researchers adapt their behaviour. Some ideas never become tickets. Some comparisons are postponed. Some old logic remains because touching it seems risky.</p><p>That matters in a business where the opportunity cost of not trying an idea can be significant. We will never observe those abandoned experiments in a project tracker, but the friction is real.</p><p>So the design question is larger than maintainability. Can our system preserve the team's appetite and ability to experiment?</p></aside>
+</section><section class="slide" data-title="A recurring design problem has shaped software engineering for decades">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">02 · DESIGN AROUND CHANGE</div><div class="num">05 / 34</div></div>
+<h1>A recurring design problem has shaped software engineering for decades</h1>
+<div class="content">
+<div class="history-grid"><div class="history-item"><div class="history-year">1972</div><div><b>Information Hiding</b><span>Parnas — organise modules around design decisions likely to change, so one change does not force unrelated parts of the system to change.</span></div></div><div class="history-item"><div class="history-year">1976</div><div><b>Program Families</b><span>Parnas — when related programs share substantial structure, identify what is common and what is intended to vary before implementing every version independently.</span></div></div><div class="history-item"><div class="history-year">1999</div><div><b>Extreme Programming</b><span>Beck — combine simple design, automated testing, refactoring, continuous integration and frequent delivery so the ability to change is sustained rather than consumed.</span></div></div><div class="history-item"><div class="history-year">2000</div><div><b>Evolutionary Design</b><span>Fowler — design is not only an upfront activity; improve the structure continuously as requirements and understanding evolve.</span></div></div><div class="history-item"><div class="history-year">2001</div><div><b>Protected Variations</b><span>Larman — identify predicted points of variation and protect the rest of the system with stable interfaces around them.</span></div></div><div class="history-item"><div class="history-year">2003</div><div><b>Domain-Driven Design</b><span>Evans — build a rigorous domain language and representation so the system preserves business distinctions, while keeping different business contexts explicit.</span></div></div><div class="history-item"><div class="history-year">2004</div><div><b>Seams</b><span>Feathers — create places where behaviour can be replaced or observed without editing the surrounding code, making change and testing more local.</span></div></div><div class="history-item"><div class="history-year">2005</div><div><b>Ports &amp; Adapters</b><span>Cockburn — keep core behaviour behind ports so production inputs, tests, simulators and alternative adapters can drive the same logic.</span></div></div></div>
+<div class="takeaway">Different ideas, same recurring concern: keep change understandable, local and testable.</div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>Before we introduce our own interpretation, I want to step back briefly. The problem we are discussing has shaped system design for decades, and the ideas on this page are useful because each attacks a different part of the same problem.</p><p>Parnas's 1972 Information Hiding paper argues that a module should hide design decisions that are likely to change, rather than simply mirror the order of computation. His 1976 Program Families work then asks how a family of related programs can share a common structure while preserving the parts that genuinely vary.</p><p>Extreme Programming, published by Kent Beck in 1999, takes a delivery-oriented view: simple design, automated tests, refactoring, continuous integration and frequent delivery reinforce each other. Fowler's 2000 discussion of evolutionary design makes the complementary point that design can continue improving as part of delivery rather than being completed once at the beginning.</p><p>Larman's 2001 Protected Variations gives perhaps the most concise formulation for our purposes: identify the points where variation is expected and protect the rest of the system with stable interfaces. Evans's 2003 Domain-Driven Design broadens the discussion to the business domain: the language and representation in the system should capture the business distinctions that actually matter, while recognising that different business contexts may legitimately use different representations.</p><p>Feathers's 2004 seam model connects changeability directly to testability: a seam is a place where behaviour can be replaced or observed without editing unrelated code. Cockburn's 2005 Ports and Adapters architecture shows the same idea at a system boundary: production inputs, simulators and tests can drive the same core behaviour through stable ports.</p><p>I am not presenting these as a checklist of methodologies. The reason to show the history is that the same concern keeps reappearing: how do we let a system evolve without allowing every change to spread through everything else? Our next step is to apply that accumulated experience to quantitative trading business and systems.</p></aside>
+</section><section class="slide" data-title="Apply these principles to quantitative trading business and systems">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">02 · DESIGN AROUND CHANGE</div><div class="num">06 / 34</div></div>
+<h1>Apply these principles to quantitative trading business and systems</h1>
+<div class="content">
+<div class="principle-row">
+<div class="principle"><b>Identify repeated variation</b><span>models, venues, feature implementations, products, business rules and workflow composition</span></div>
+<div class="arrow">→</div>
+<div class="principle"><b>Create dependable seams</b><span>clear technical interfaces and business operations, with explicit state ownership and effects</span></div>
+<div class="arrow">→</div>
+<div class="principle"><b>Keep unrelated parts independent</b><span>a change behind one boundary should not force unrelated components or workflows to change with it</span></div>
+</div>
+<div class="takeaway">We are applying established change-oriented design ideas to both the technical system and the trading business workflow.</div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden="">
+<p>This is the translation from software-design history into our quantitative-trading context.</p>
+<p>We cannot know which model or business idea will make money, but we do know that some forms of variation are repeated features of the business: models change, venues change, products evolve, features are replaced, and business workflows are repeatedly recomposed.</p>
+<p>So the goal is not maximum flexibility. The goal is to create useful seams around variation that we genuinely expect. At the technical level these may be APIs or subgraph boundaries. At the business level they are operations and workflow boundaries whose inputs, outputs, state ownership and effects are clear.</p>
+<p>I prefer “keep unrelated parts independent” to “keep unrelated parts stable”. Stable can sound as if those parts should never change. The real point is that they should not have to change merely because this experiment or component changed.</p>
+</aside>
+</section><section class="slide" data-title="A graph can look modular while its dependencies are not">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">02 · DESIGN AROUND CHANGE</div><div class="num">07 / 34</div></div>
+<h1>A graph can look modular while its dependencies are not</h1>
+<div class="content">
+<div class="graph bad-graph">
+<div class="node">Venue</div><div class="conn">→</div><div class="node">Features</div><div class="conn">→</div><div class="node">Model</div><div class="conn">→</div><div class="node">Signal</div><div class="conn">→</div><div class="node">Decision</div>
+</div>
+<div class="two-cols compact">
+<div class="card warning"><div class="card-title">Hidden venue coupling</div><p><b>Features</b> reads Venue A field names and update conventions directly. Replacing the venue therefore requires feature changes too.</p></div>
+<div class="card warning"><div class="card-title">Hidden model coupling</div><p><b>Signal / Decision</b> relies on Model V1 output layout, update timing or internal state. Replacing the model therefore changes downstream code too.</p></div>
+</div>
+<div class="takeaway">If Venue A or Model V1 changes, several boxes change together. The boxes are separate; the useful seams are not.</div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden="">
+<p>This is the same graph we will improve on the next slide, so I want the coupling to be explicit rather than implied.</p>
+<p>On the left, the Feature node does not consume a stable market-event definition; it understands Venue A's fields and update conventions directly. A new venue therefore leaks into the feature implementation.</p>
+<p>On the right, the Signal or Decision code relies on details that belong to Model V1: its output layout, timing or internal state. A model replacement therefore spreads into downstream logic.</p>
+<p>That is the coupling we are trying to remove on the next slide. Modularity is about independent change, not only about drawing separate boxes.</p>
+</aside>
+</section><section class="slide" data-title="Hide likely-to-change components behind dependable boundaries">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">02 · DESIGN AROUND CHANGE</div><div class="num">08 / 34</div></div>
+<h1>Hide likely-to-change components behind dependable boundaries</h1>
+<div class="content">
+<div class="boundary-diagram">
+<div class="variant-stack"><div class="mini">Venue A adapter</div><div class="mini">Venue B adapter</div></div>
+<div class="boundary">Market-event contract</div>
+<div class="core">Shared feature / business graph</div>
+<div class="boundary">Prediction contract</div>
+<div class="variant-stack"><div class="mini">Model V1</div><div class="mini">Model V2</div><div class="mini">Model V3</div></div>
+</div>
+<div class="takeaway">A good boundary is also a useful seam: replace, test and compare alternatives without disturbing unrelated parts.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>Here is the positive version of the same idea. Venue-specific details live behind a market-event boundary. Model-specific implementation lives behind a prediction boundary. The surrounding graph depends on those contracts rather than on implementation details.</p><p>The details of the exact Java interface are not the point. A boundary is only useful if the contract is meaningful enough to support independent change. That includes state lifecycle and external effects when the component is stateful.</p><p>The benefit is practical: a venue change, a model experiment or a feature implementation can be developed and tested with a smaller blast radius.</p></aside>
+</section><section class="slide" data-title="Program families: share the stable structure, isolate the experiment">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">02 · DESIGN AROUND CHANGE</div><div class="num">09 / 34</div></div>
+<h1>Program families: share the stable structure, isolate the experiment</h1>
+<div class="content">
+<div class="family">
+<div class="common">Shared inputs &amp; workflow</div>
+<div class="branch"><div class="variant">Variant A</div><div class="variant">Variant B</div><div class="variant">Variant C</div></div>
+<div class="common">Shared downstream contract</div>
+</div>
+<div class="two-cols compact">
+<div class="card"><div class="card-title">What stays common</div><p>event meaning, shared inputs, downstream business contract, simulator setup</p></div>
+<div class="card"><div class="card-title">What we vary</div><p>the part of the research hypothesis we actually want to compare</p></div>
+</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>Program Families is especially relevant in quant research because we often know that we will try a family of alternatives even when we cannot know which member will work.</p><p>A common mistake is either to copy the entire pipeline for each version or to create one oversized generic framework with a large number of flags. The program-family idea suggests a different approach: understand the stable structure, then isolate the genuine variation.</p><p>In the talk I can give an alpha-composition example verbally. It does not need a dedicated slide. The important idea is that repeated experiments should share a trustworthy comparison basis where that sharing is real.</p></aside>
+</section><section class="slide" data-title="State does not prevent replaceability — hidden coupling does">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">02 · DESIGN AROUND CHANGE</div><div class="num">10 / 34</div></div>
+<h1>State does not prevent replaceability — hidden coupling does</h1>
+<div class="content">
+<table>
+<tr><th></th><th>Stateful but replaceable</th><th>Coupled state</th></tr>
+<tr><td><b>Where does state live?</b></td><td>Inside the component or subgraph that owns it.</td><td>Shared across nodes, or relied on from outside the boundary.</td></tr>
+<tr><td><b>What do other nodes know?</b></td><td>Only the contract: inputs, outputs, lifecycle and declared effects.</td><td>Internal update timing, fields, reset assumptions or side effects.</td></tr>
+<tr><td><b>What happens when we replace it?</b></td><td>Initialise/reset the new implementation and reconnect the same contract.</td><td>Several other nodes need coordinated changes.</td></tr>
+</table>
+<div class="takeaway">State is compatible with modular design when it is owned and contained. Hidden state dependencies create coupling.</div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden="">
+<p>Stateful and coupled are not the same thing.</p>
+<p>A predictor, estimator or business subgraph can own quite a lot of state and still be modular. The key question is whether that state is contained inside the boundary and whether its lifecycle and declared effects are explicit.</p>
+<p>Coupling appears when other nodes quietly rely on internal timing, shared mutable state, reset behaviour or side effects that are not part of the contract. Then replacing one component requires coordinated edits elsewhere.</p>
+<p>So the design test is not “is this node stateful?” It is “who owns the state, who is allowed to depend on it, and what must the rest of the graph know?”</p>
+</aside>
+</section><section class="slide" data-title="The same principle applies to business workflows">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">02 · DESIGN AROUND CHANGE</div><div class="num">11 / 34</div></div>
+<h1>The same principle applies to business workflows</h1>
+<div class="content">
+<div class="two-level">
+<div class="level"><div class="level-title">Technical architecture</div><div class="level-line">stable interface → replaceable component implementation</div></div>
+<div class="level"><div class="level-title">Business workflow architecture</div><div class="level-line">stable business operation → replaceable or recomposable workflow</div></div>
+</div>
+<div class="takeaway">We can hide variation in business decisions just as we hide variation in technical implementations.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>The same design principle applies above the code level. We can think of a business workflow as a composition of operations. The operation definitions provide the dependable points of connection; the way we compose them can change as research, products or business requirements change.</p><p>That is why I do not want to separate technical architecture and business workflow architecture too sharply. They are two applications of the same principle: identify what varies, define what the rest of the system can rely on, and keep changes local where possible.</p></aside>
+</section><section class="slide" data-title="A highly coupled workflow makes several business choices inseparable">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">02 · DESIGN AROUND CHANGE</div><div class="num">12 / 34</div></div>
+
+
+
+
+
+<h1>A highly coupled workflow makes several business choices inseparable</h1>
+<div class="subtitle">A reasonable first implementation can hard-code the product, contract mapping, signal rule and execution tactic into one fixed chain.</div>
+<div class="content">
+<div class="coupled-layout">
+<div class="workflow-panel bad coupled-main">
+<div class="panel-title">Specific CME M/Q basis workflow</div>
+<div class="panel-sub">Every business choice is embedded directly in the sequence.</div>
+<div class="flow-col compact-flow">
+<div class="flow-box bad"><b>CME M-month + Q-month data</b><span>Underlying and contract convention are fixed here.</span></div><div class="flow-arrow">↓</div>
+<div class="flow-box bad"><b>Calculate M–Q spread</b><span>The relative-value representation is fixed here.</span></div><div class="flow-arrow">↓</div>
+<div class="flow-box bad"><b>Compare with ±3σ range</b><span>The mean-reversion rule is fixed here.</span></div><div class="flow-arrow">↓</div>
+<div class="flow-box bad"><b>Place GTC in Q-month contract</b><span>The first-leg execution tactic is fixed here.</span></div><div class="flow-arrow">↓ fill</div>
+<div class="flow-box bad"><b>Place IOC in M-month contract</b><span>The hedge-leg execution tactic is fixed here.</span></div>
+</div>
+</div>
+<div class="coupled-side">
+<div class="panel-title">What is coupled together?</div>
+<div class="panel-sub">These choices may change for different products or experiments, but the workflow gives them no independent boundary.</div>
+<div class="coupled-choice"><b>Underlying &amp; active-month mapping</b><span>CME M/Q is assumed throughout the flow.</span></div>
+<div class="coupled-choice"><b>Relative-value state</b><span>The workflow assumes one particular spread construction.</span></div>
+<div class="coupled-choice"><b>Signal logic</b><span>The ±3σ rule is embedded directly in the process.</span></div>
+<div class="coupled-choice"><b>Execution tactic</b><span>Q-month GTC followed by M-month IOC is inseparable from the signal workflow.</span></div>
+</div>
+</div>
+<div class="takeaway">The problem is not that this first version is unreasonable. The problem appears when the next idea requires changing one choice without changing all the others.</div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden="">
+<p>Let me make the business-workflow coupling concrete before we generalise it.</p>
+<p>A first version of a basis trade might reasonably start from CME M- and Q-month contracts, calculate the spread, compare it with a three-sigma range, place a GTC order in the Q-month contract, and after that fills, use an IOC order in the M-month contract to establish the basis position.</p>
+<p>There is nothing inherently wrong with this as a first implementation. The problem is that several independent business choices have become inseparable in the workflow: which underlying and active contracts we trade, how we represent the relative-value state, how we generate the signal, and how we execute the two legs.</p>
+<p>Once research starts asking for different underlyings, different month conventions, another mean-reversion signal or another pair-execution tactic, the whole workflow becomes the unit of change.</p>
+<p>The next slide pulls the camera back. Instead of treating this particular workflow as the design, we identify the larger business structure behind it and ask which roles can vary independently.</p>
+</aside>
+</section><section class="slide" data-title="A reusable business structure can support very different relative-value strategies">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">02 · DESIGN AROUND CHANGE</div><div class="num">13 / 34</div></div>
+<h1>A reusable business structure can support very different relative-value strategies</h1>
+<div class="subtitle">Keep the business roles recognisable while allowing product mapping, relative-value representation, signal logic and execution tactics to vary independently.</div>
+<div class="content rv-content">
+<div class="rv-pipeline">
+<div class="rv-node"><div class="rv-tag">Product setup</div><b>Instrument &amp; contract mapping</b><span>Underlying, venue, active contracts or instruments</span></div><div class="rv-arrow">→</div>
+<div class="rv-node rv-core"><div class="rv-tag">Business state</div><b>Relative-value state</b><span>Basis, spread, curve shape, residual or another relationship</span></div><div class="rv-arrow">→</div>
+<div class="rv-node"><div class="rv-tag">Research logic</div><b>Signal model</b><span>Decide whether the state represents an opportunity</span></div><div class="rv-arrow">→</div>
+<div class="rv-node rv-intent"><div class="rv-tag">Boundary</div><b>Trade intent</b><span>Express the desired position change</span></div><div class="rv-arrow">→</div>
+<div class="rv-node"><div class="rv-tag">Execution</div><b>Execution strategy</b><span>Choose how to establish or unwind the position</span></div><div class="rv-arrow">→</div>
+<div class="rv-node rv-core"><div class="rv-tag">Result</div><b>Position / state</b><span>Track fills, exposure and state</span></div>
+</div>
+<div class="rv-examples-title">Four examples using the same business structure</div>
+<div class="rv-examples">
+<div class="rv-ex"><b>1 · Futures calendar spread</b><span><strong>Mapping</strong> Underlying-specific active months and roll convention</span><span><strong>State</strong> Calendar basis / curve spread</span><span><strong>Signal</strong> Mean reversion or carry-aware rule</span><span><strong>Execution</strong> Work less-liquid leg, hedge liquid leg</span></div>
+<div class="rv-ex"><b>2 · Cash–futures basis</b><span><strong>Mapping</strong> Cash instrument + corresponding future</span><span><strong>State</strong> Carry-adjusted cash–futures basis</span><span><strong>Signal</strong> Fair-value deviation / mean reversion</span><span><strong>Execution</strong> Coordinate cash and futures legs</span></div>
+<div class="rv-ex"><b>3 · Statistical / cointegration pair</b><span><strong>Mapping</strong> Pair selection + hedge ratio</span><span><strong>State</strong> Cointegration or statistical residual</span><span><strong>Signal</strong> Error-correction / z-score / MR model</span><span><strong>Execution</strong> Pair execution reflecting relative liquidity</span></div>
+<div class="rv-ex"><b>4 · Cross-venue relative value</b><span><strong>Mapping</strong> Equivalent instruments across venues</span><span><strong>State</strong> Venue-adjusted relative price</span><span><strong>Signal</strong> Deviation from normal relationship</span><span><strong>Execution</strong> Venue-aware execution and hedge</span></div>
+</div>
+<div class="takeaway"><b>Common structure does not mean identical economics.</b> The reusable asset is a clear set of business roles and boundaries, not one universal strategy implementation.</div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden="">
+<p>The previous slide showed one highly specific CME workflow. Here I want to pull the camera back and show the larger business structure underneath it.</p>
+<p>The first role is instrument and contract mapping. This matters because active-futures conventions differ across gold, crude, equity index and FX futures. Those month-code decisions should not be buried inside the signal or execution logic.</p>
+<p>The next role is the relative-value state. A calendar basis, a cash-futures basis and a cointegration residual are not the same economic object. But they can play the same role in a workflow: they represent the relative relationship we want to monitor.</p>
+<p>The signal model then decides whether that state represents an opportunity. Mean reversion is one family of signal logic; it is not part of the definition of basis itself.</p>
+<p>Trade intent gives us a useful boundary between research logic and execution. The execution strategy then decides how to establish the position—for example by working the less-liquid leg passively and hedging the more-liquid leg once the first leg fills.</p>
+<p>The four examples at the bottom are deliberately different. The point is not that they share identical economics or should use one generic implementation. The point is that we can recognise the same business roles while allowing each product to use its own mapping, state definition, signal model and execution implementation.</p>
+<p>This gives us a reusable business structure without erasing genuine product differences. It also gives us clearer places to experiment, test and extend the system.</p>
+</aside>
+</section><section class="slide" data-title="Avoid two common extremes">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">02 · DESIGN AROUND CHANGE</div><div class="num">14 / 34</div></div>
+<h1>Avoid two common extremes</h1>
+<div class="content">
+<div class="two-cols">
+<div class="card warning"><div class="card-title">Copy every workflow</div><p>Fast once, but fixes and improvements diverge; comparison becomes harder.</p></div>
+<div class="card warning"><div class="card-title">Build one universal framework</div><p>Flags, conditions and accidental interactions accumulate before the common structure is understood.</p></div>
+</div>
+<div class="takeaway">Share what has a stable common contract. Keep genuine differences explicit.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>A change-oriented design does not imply maximum reuse. The two obvious extremes are repeated copying and premature generalisation.</p><p>Copying can be a sensible short-term research choice, especially when we do not yet understand whether two ideas are genuinely related. But repeated copies become expensive if they evolve together. On the other hand, a universal framework built too early can become a collection of conditionals and flags.</p><p>The practical rule is to abstract around stable shared contracts and observed variation, not visual similarity alone.</p></aside>
+</section><section class="slide" data-title="Understand the business before designing models and systems">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">03 · BUSINESS CONCEPTS, MODELS &amp; SYSTEMS</div><div class="num">15 / 34</div></div>
+<h1>Understand the business before designing models and systems</h1>
+<div class="content">
+<div class="definition-grid">
+<div class="def"><b>Business concepts</b><span>What are the underlying facts, states and distinctions that actually matter to the trading business?</span></div>
+<div class="def"><b>Business operations</b><span>What can be done, under which conditions, and what state or external world may each operation change?</span></div>
+<div class="def"><b>Models and systems</b><span>Represent those concepts and operations clearly enough that workflows can be composed without guessing or recreating lost distinctions downstream.</span></div>
+</div>
+<div class="takeaway">Models and systems should be true to the business — but that requires understanding the underlying concepts and workflows, not simply copying today's process or taxonomy.</div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>This section goes one step further than saying that system objects should have good business names. Before we design the models and systems, we need to understand what the business concepts and operations really are.</p><p>That can require a fairly deep domain discussion. We need to understand the facts and states that matter, the operations the business performs, their applicability, and the effects they are allowed to have. Only then can we decide which distinctions our models and systems need to preserve.</p><p>Domain-Driven Design is useful here as a reference because it treats rigorous domain understanding and shared language as part of system design. But the point for us is practical rather than methodological: if our understanding of the business is vague or fragmented, the system will faithfully encode that vagueness and fragmentation.</p><p>And that leads to the next point. The business taxonomy and workflow we see today may themselves be the product of years of organic development. We need to distinguish the underlying business from the historical path by which today's process emerged.</p></aside>
+</section>
+<section class="slide" data-title="Organic business growth can fragment concepts, taxonomy and workflows">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">03 · BUSINESS CONCEPTS, MODELS &amp; SYSTEMS</div><div class="num">16 / 34</div></div>
+<h1>Organic business growth can fragment concepts, taxonomy and workflows</h1>
+<div class="content">
+<div class="business-remodel">
+<div class="remodel-step"><b>Business evolves in stages</b><span>new products, local terminology, organisational boundaries, exceptions and operational patches accumulate over time</span></div>
+<div class="arrow">→</div>
+<div class="remodel-step"><b>Review from first principles</b><span>understand the underlying economic concepts, operations and genuine constraints behind the historical taxonomy and process</span></div>
+<div class="arrow">→</div>
+<div class="remodel-step"><b>Distil and represent the business</b><span>preserve real distinctions, consolidate accidental fragmentation, then reflect the result in models and systems</span></div>
+</div>
+<div class="takeaway">Do not simplify by cutting business corners. Simplify by understanding which complexity is fundamental and which is an artefact of history, organisation or earlier process choices.</div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>Trading businesses rarely emerge from a clean first-principles taxonomy. They grow in stages. Products are added at different times, desks solve local problems, processes inherit earlier constraints, and terminology reflects the organisation that existed when each piece was created.</p><p>If we simply copy that history into our models and systems, we can preserve every local patch as a separate object, flag or workflow. The system then inherits the fragmentation of the business's development path rather than representing the underlying business clearly.</p><p>Sometimes the right design work therefore starts with a first-principles review of the business itself. We need to understand why the current categories and processes exist, which distinctions are economically or operationally real, and which are historical artefacts. A deeper review may show that several apparently different cases are expressions of one underlying concept; in other places it may show that one convenient label is hiding two genuinely different business states.</p><p>The qualification is important: we must remain true to the business. This is not permission to simplify away a real trading constraint because a cleaner system would be convenient. The simplification is justified only when deeper understanding shows that the fragmentation is accidental rather than fundamental.</p></aside>
+</section>
+<section class="slide" data-title="Objects and states in our models and systems should preserve the business distinctions that matter">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">03 · BUSINESS CONCEPTS, MODELS &amp; SYSTEMS</div><div class="num">17 / 34</div></div>
+<h1>Objects and states in our models and systems should preserve the business distinctions that matter</h1>
+<div class="content">
+<div class="contrast">
+<div class="card"><div class="card-title">When the distinction is represented</div><p>Different business states remain distinguishable, so downstream logic can apply the appropriate operation.</p></div>
+<div class="card warning"><div class="card-title">When the distinction is lost</div><p>Downstream nodes compensate with flags, special cases and contextual assumptions.</p></div>
+</div>
+<div class="takeaway">Some downstream complexity is the cost of an upstream definition that was too vague, too fragmented, or lost a distinction the business actually needs.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden="">
+<p>Once we have a clearer understanding of the business, the objects and states in our models and systems should preserve the distinctions that actually matter to it.</p>
+<p>A familiar market-data example is the difference between a complete state and an update whose meaning depends on previous state. Another is the difference between a genuine business instruction to target zero and the absence of a new instruction. The exact examples are less important than the pattern.</p>
+<p>If the system representation collapses two business states that need different operations, downstream nodes have to reconstruct the lost distinction through flags, context and special cases. Complexity has leaked from an imprecise upstream model into every consumer.</p>
+<p>Conversely, we should not preserve distinctions merely because the current business process happens to use two historical names. The distinction should survive in software when it is genuinely needed by the business behaviour.</p>
+</aside>
+</section><section class="slide" data-title="Define operations by business intent and explicit effects">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">03 · BUSINESS CONCEPTS, MODELS &amp; SYSTEMS</div><div class="num">18 / 34</div></div>
+<h1>Define operations by business intent and explicit effects</h1>
+<div class="content">
+<div class="three-cols">
+<div class="card emphasis"><div class="card-title">Business intent</div><p>What business action or decision does this operation represent? Its name and result should match that intention precisely.</p></div>
+<div class="card emphasis"><div class="card-title">Applicability</div><p>When is the operation valid to run? What input, business state, timing or lifecycle conditions must hold?</p></div>
+<div class="card emphasis"><div class="card-title">Effects</div><p>What state or external action may it change? Those effects should be explicit; unrelated state should not change unexpectedly.</p></div>
+</div>
+<div class="takeaway">Clear operations remain modular building blocks as the system grows. New modules and features can be added with a much clearer view of their effect on existing behaviour.</div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden="">
+<p>An operation should reflect the business intention as exactly as we reasonably can. That means its purpose, applicability, output and effects are easy to understand from the business point of view.</p>
+<p>I do not mean that every operation must be side-effect free. Sending an order clearly has an external effect. Reserving risk capacity may deliberately mutate state. The requirement is that those effects are intended, explicit and owned—rather than surprising side effects that other components only discover indirectly.</p>
+<p>This matters when the system grows. If each operation remains a clear modular unit, we can add a new feature, factor an existing workflow, or introduce another module with a much better understanding of what existing behaviour can and cannot be affected.</p>
+<p>That is one of the strongest reasons to invest in precise business definitions: they make future extension safer, not because the system stops changing, but because the impact of change is easier to reason about.</p>
+</aside>
+</section><section class="slide" data-title="Accurate definitions reduce false compatibility">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">03 · BUSINESS CONCEPTS, MODELS &amp; SYSTEMS</div><div class="num">19 / 34</div></div>
+<h1>Accurate definitions reduce false compatibility</h1>
+<div class="content">
+<div class="compat">
+<div class="item">Looks compatible<br/><span>same fields / type / shape</span></div>
+<div class="arrow">≠</div>
+<div class="item">Business compatible<br/><span>same meaning, assumptions and applicable operation</span></div>
+</div>
+<div class="takeaway">A tighter definition reduces the chance that an operation is applied to something that only looks compatible.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>This is one of the most important messages in the business-definition section. Two objects can be type-correct, structurally similar and still be wrong to connect.</p><p>When definitions are tight enough, the system has a clearer basis for deciding whether a business operation is applicable. An incompatible event does not necessarily need to be rejected as an error. In an event-driven graph it may simply not trigger that operation or chain.</p><p>The benefit is both correctness and simplicity: fewer places need defensive interpretation of inputs whose meaning should already have been resolved.</p></aside>
+</section><section class="slide" data-title="Some edge cases come from reality; others come from fragmented definitions and history">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">03 · BUSINESS CONCEPTS, MODELS &amp; SYSTEMS</div><div class="num">20 / 34</div></div>
+<h1>Some edge cases come from reality; others come from fragmented definitions and history</h1>
+<div class="content">
+<div class="three-cols">
+<div class="card"><div class="card-title">Genuine external exception</div><p>A rare market or operational event that is real, detectable and contained. A guard, alert or recovery path may be enough.</p></div>
+<div class="card"><div class="card-title">Historical business fragmentation</div><p>Different names, processes or exceptions accumulated as the business evolved. A deeper review may reveal a simpler underlying taxonomy.</p></div>
+<div class="card warning"><div class="card-title">System representation ambiguity</div><p>The models or systems lose a distinction the business actually needs, so downstream components recreate it with flags, contextual assumptions and special cases.</p></div>
+</div>
+<div class="takeaway">Before adding another edge-case branch, ask whether the complexity is fundamental, historically accumulated, or introduced by the way we represent the business in the system.</div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden="">
+<p>This distinction is now more nuanced than simply reality versus system.</p>
+<p>Some edge cases are genuinely imposed by the external world. If a rare market or operational event is real, easy to detect and safely contained, a simple guard or recovery path may be exactly the right solution.</p>
+<p>But some apparent business edge cases are products of history. A business may have developed in stages, with local taxonomies and processes that made sense at different moments. Once we understand the underlying business more deeply, several of those cases may turn out to be different historical expressions of the same concept.</p>
+<p>And a third category is ambiguity introduced by the system representation itself: we collapse two genuinely different states, then downstream code has to reconstruct the distinction through special cases.</p>
+<p>The engineering response should depend on which category we are dealing with. The purpose of first-principles business modelling is not to deny business complexity. It is to avoid treating historical or modelling fragmentation as if it were an irreducible law of the business.</p>
+</aside>
+</section><section class="slide" data-title="Consistency within a business context — not one universal representation">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">03 · BUSINESS CONCEPTS, MODELS &amp; SYSTEMS</div><div class="num">21 / 34</div></div>
+<h1>Consistency within a business context — not one universal representation</h1>
+<div class="content">
+<div class="contexts">
+<div class="context"><b>Research context</b><span>concepts optimised for research questions and evidence</span></div>
+<div class="context"><b>Execution context</b><span>concepts optimised for orders, state and operational behaviour</span></div>
+<div class="context"><b>Explicit mapping</b><span>connect contexts where necessary rather than forcing false uniformity</span></div>
+</div>
+<div class="takeaway">Precise definitions do not require one universal representation across every business context.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>Bounded Context is a useful DDD concept here because it prevents the opposite misunderstanding: accurate definitions do not mean the whole organisation needs one universal vocabulary or representation.</p><p>The same word can legitimately have different representations in different business contexts. A research signal and an execution instruction may be related but should not be forced into one generic type if their semantics differ.</p><p>The goal is consistency within a context and explicit translation between contexts where needed. That gives us precision without building a universal framework that erases important distinctions.</p></aside>
+</section><section class="slide" data-title="What hidden assumptions can cost">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">04 · ENGINEERING LESSONS</div><div class="num">22 / 34</div></div>
+<h1>What hidden assumptions can cost</h1>
+<div class="content">
+<div class="failure-grid detailed">
+<div class="failure-card">
+<div class="failure-issue">Interface values were interpreted with inconsistent units.</div>
+<div class="failure-name">Mars Climate Orbiter</div>
+<div class="failure-label">CAUSE</div>
+<div class="failure-text">A contractor's ground software calculated small thruster impulses using pound-force seconds. The navigation software consumed those numbers as if they were newton-seconds. The interface carried valid numeric values, but the two sides had not established the same unit definition, so each correction gradually pushed the estimated trajectory away from reality.</div>
+<div class="failure-label">COST</div>
+<div class="failure-text">The spacecraft was lost during Mars orbit insertion, ending the mission.</div>
+<div class="failure-label lesson-label">LESSON</div>
+<div class="failure-text"><b>Compatibility depends on precise definitions</b>, not merely on values that look compatible.</div>
+</div>
+<div class="failure-card">
+<div class="failure-issue">A reused assumption did not survive a new operating environment.</div>
+<div class="failure-name">Ariane 5 Flight 501</div>
+<div class="failure-label">CAUSE</div>
+<div class="failure-text">The inertial-reference software had been reused from Ariane 4, including a calculation that assumed a range of horizontal velocity values appropriate to the older launch profile. Ariane 5 accelerated differently. A value exceeded that inherited range, a numeric conversion failed, and both redundant inertial systems followed the same software behaviour.</div>
+<div class="failure-label">COST</div>
+<div class="failure-text">The launcher was destroyed shortly after liftoff and the payload was lost.</div>
+<div class="failure-label lesson-label">LESSON</div>
+<div class="failure-text"><b>Reuse does not remove assumptions.</b> Operating conditions remain part of the contract.</div>
+</div>
+<div class="failure-card">
+<div class="failure-issue">A local change interacted with hidden legacy behaviour.</div>
+<div class="failure-name">Knight Capital</div>
+<div class="failure-label">CAUSE</div>
+<div class="failure-text">Knight introduced new trading functionality that reused a control flag previously associated with dormant Power Peg code. The new software reached seven of eight servers, but one server still ran the old code. When the flag was activated there, the obsolete logic began sending unintended orders into the market.</div>
+<div class="failure-label">COST</div>
+<div class="failure-text">More than $460 million of trading losses in about 45 minutes.</div>
+<div class="failure-label lesson-label">LESSON</div>
+<div class="failure-text"><b>Local-looking changes can have system-wide effects</b> when dependencies and verification are unclear.</div>
+</div>
+</div>
+<div class="takeaway">Definitions, inherited assumptions and hidden dependencies all shape the risk of change.</div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>These three incidents follow the same structure: what the issue looked like, what caused it, what it cost, and the lesson relevant to our design discussion.</p><p>Mars Climate Orbiter is the cleanest example of a definition mismatch. A contractor's ground software expressed thruster impulse in pound-force seconds. The navigation software treated the incoming values as newton-seconds. Nothing about the numeric values themselves announced that mismatch. Each correction therefore distorted the estimated trajectory until the spacecraft arrived at Mars on the wrong path and was lost. The lesson for us is that compatibility depends on a shared definition, not merely on a field type or a plausible number.</p><p>Ariane 5 illustrates inherited assumptions. The inertial-reference software was reused from Ariane 4, including a calculation built around the older vehicle's expected horizontal-velocity range. Ariane 5 had a different trajectory and acceleration profile. A value exceeded that inherited range, a conversion failed, and the two redundant inertial systems shared the same implementation and therefore the same failure. Reuse is valuable, but the assumptions under which an implementation is valid remain part of its contract.</p><p>Knight Capital is especially relevant to trading. A new feature reused a control flag that had previously activated dormant Power Peg functionality. The new release was deployed to seven of eight servers. On the eighth server the old code remained, so the same flag activated obsolete order-generation behaviour. That local deployment inconsistency interacted with hidden legacy behaviour and produced more than 460 million dollars of losses in roughly 45 minutes.</p><p>I would not claim that one architecture pattern would have prevented these incidents. Their value here is narrower: they show how definition mismatch, inherited assumptions and hidden dependencies can turn changes that look local into system-level consequences.</p></aside>
+</section><section class="slide" data-title="Testability is an architectural property">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">05 · TESTABILITY</div><div class="num">23 / 34</div></div>
+<h1>Testability is an architectural property</h1>
+<div class="content">
+<div class="split">
+<div class="big-statement">A useful seam is also a useful test boundary.</div>
+<div class="bullet-panel">
+<p>• Stable inputs and outputs give us reusable contract tests.</p>
+<p>• Swappable variants give us clear expected differences.</p>
+<p>• Contained state makes reset and reproducibility tractable.</p>
+<p>• Full graph replay checks the interaction of all components.</p>
+</div>
+</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>This is where Michael Feathers's seam becomes more than a metaphor. A seam is useful because we can replace behaviour, but that also means we have a natural place to drive, observe and verify behaviour.</p><p>Stable boundaries make test design clearer. We can test the contract once across compatible implementations, then add feature-specific tests for the intended differences, and finally run system-level replay to verify composition.</p><p>This matters later for AI coding as well. The path from manual review to more automated review depends heavily on having verification that is explicit, repeatable and independent of one developer's understanding of the code.</p></aside>
+</section><section class="slide" data-title="Stable boundaries make tests reusable">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">05 · TESTABILITY</div><div class="num">24 / 34</div></div>
+<h1>Stable boundaries make tests reusable</h1>
+<div class="content">
+<div class="test-flow">
+<div class="test-box">Contract tests</div><div class="conn">→</div><div class="variant-col"><span>Variant A</span><span>Variant B</span><span>Variant C</span></div><div class="conn">→</div><div class="test-box">Expected output / state behaviour</div>
+</div>
+<div class="takeaway">We do not need to reinvent the validation strategy for every compatible experiment.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>Imagine three implementations behind the same boundary. The common contract gives us a reusable set of tests: accepted inputs, output semantics, reset behaviour, state ownership and prohibited effects.</p><p>Each variant still needs tests for what is intentionally different. And contract testing does not replace full graph regression, because interactions may still matter.</p><p>The architectural value is that the testing problem becomes more structured. We know what can be reused and what needs to change for the experiment.</p></aside>
+</section><section class="slide" data-title="A production-faithful simulator makes regression repeatable">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">05 · TESTABILITY</div><div class="num">25 / 34</div></div>
+<h1>A production-faithful simulator makes regression repeatable</h1>
+<div class="content">
+<div class="drivers">
+<div class="driver">Live events</div><div class="driver">Historical replay</div><div class="driver">Deterministic simulator</div>
+</div>
+<div class="down">↓</div>
+<div class="wide-boundary">Same event / business boundary</div>
+<div class="down">↓</div>
+<div class="wide-core">Same business graph</div>
+<div class="takeaway">The closer simulation is to production event semantics, the more useful it becomes for regression and experimentation.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>Ports and Adapters gives us a useful reference here. One reason to separate application logic from external drivers is that the same logic can be driven by production inputs, automated tests or batch processes.</p><p>For an event-driven quant system, the analogous capability is valuable: live events, historical replay and deterministic simulation should exercise the same business graph through compatible event boundaries where possible.</p><p>This is what I mean by replay: not merely a performance backtest, but reproducing production-style event processing so that we can run deterministic regression tests. UAT remains useful for environment and operational checks, but it is not the best place to discover deterministic business-logic defects.</p></aside>
+</section><section class="slide" data-title="Improving the design is part of delivery">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">06 · CONTINUOUS DESIGN</div><div class="num">26 / 34</div></div>
+<h1>Improving the design is part of delivery</h1>
+<div class="content">
+<div class="xp-grid">
+<div class="xp"><b>Simple design</b><span>do not speculate about every possible future</span></div>
+<div class="xp"><b>Automated tests</b><span>make structural improvement safer</span></div>
+<div class="xp"><b>Continuous refactoring</b><span>keep the design aligned with what we learn</span></div>
+<div class="xp"><b>Frequent delivery</b><span>learning and structure evolve together</span></div>
+</div>
+<div class="takeaway">Frequent delivery alone is not evolutionary design. The structure must keep improving as the software changes.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>This is where Extreme Programming provides a useful historical reference. The important principle for us is not a particular XP ritual. It is the idea that improving the design is a continuous part of delivering software.</p><p>That fits our environment well. We do not need a complete architecture for every hypothetical future strategy. We can start simply, learn from real variation, and improve the seams and definitions as the system becomes shared infrastructure.</p><p>But simply shipping frequent patches is not evolutionary design. If every delivery adds another special case without improving the underlying structure, the ability to change still deteriorates.</p></aside>
+</section><section class="slide" data-title="Design investment can pay back when the same area changes repeatedly">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">06 · CONTINUOUS DESIGN</div><div class="num">27 / 34</div></div>
+<h1>Design investment can pay back when the same area changes repeatedly</h1>
+<div class="content">
+<div class="subtitle compact-subtitle">The first implementation is only one part of the lifetime cost.</div>
+<table class="stamina-table">
+<tr><th>Approach</th><th>At the beginning</th><th>When the same area changes again and again</th></tr>
+<tr><td><b>Quick local change</b></td><td>Little setup; often the fastest route to the first result.</td><td>Each later change may require more investigation, integration work and broad regression.</td></tr>
+<tr><td><b>Clear boundary + reusable tests</b></td><td>Some extra design and test setup.</td><td>Later variants can reuse the same structure, contracts and much of the verification.</td></tr>
+</table>
+<div class="takeaway">Design effort can pay back when repeated change is likely. For one-off work, the simpler route may still be the right one.</div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden="">
+<p>This is the Design Stamina idea in plain language.</p>
+<p>A quick local change may genuinely be the best way to get the first result. The trade-off appears when the same part of the system changes repeatedly. If every variation requires us to rediscover dependencies, reconnect several components and rebuild the regression story, the accumulated cost can become much larger than the first implementation suggested.</p>
+<p>A useful boundary and reusable tests cost something to establish, but they can reduce that repeated work. The point is not that the second approach always wins. It is to judge the likely lifetime pattern of change rather than looking only at today's implementation effort.</p>
+<p>Fowler called this the Design Stamina Hypothesis because it is a hypothesis to evaluate, not a law that justifies architecture everywhere.</p>
+</aside>
+</section><section class="slide" data-title="Choose the simplest design that fits the expected pattern of change">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">06 · CONTINUOUS DESIGN</div><div class="num">28 / 34</div></div>
+<h1>Choose the simplest design that fits the expected pattern of change</h1>
+<div class="content">
+<table>
+<tr><th>What kind of problem is this?</th><th>A simple response to consider</th></tr>
+<tr><td><b>Likely to be a one-off experiment</b></td><td>Keep the implementation simple and learn first.</td></tr>
+<tr><td><b>A rare, genuine external anomaly</b></td><td>Detect it, contain the impact, alert and recover.</td></tr>
+<tr><td><b>The same confusion keeps reappearing</b></td><td>Revisit the business definition or the boundary that is creating the ambiguity.</td></tr>
+<tr><td><b>We expect many variants of the same idea</b></td><td>Create a useful seam and reuse the verification around it.</td></tr>
+<tr><td><b>The old boundary no longer matches reality</b></td><td>Refactor it. The boundary is a design choice, not a permanent rule.</td></tr>
+</table>
+<div class="takeaway">Choose the simplest design that fits the expected pattern of change and keeps total system complexity manageable.</div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden="">
+<p>This is the judgement I want the talk to encourage, without turning any of the principles into rules.</p>
+<p>If something is probably a one-off research experiment, keeping it simple may be exactly right. If a rare external event can be detected and contained safely, a guard and alert may be better than building a large framework around it.</p>
+<p>But if the same ambiguity keeps appearing in several places, that is a clue that the business definition or boundary may be wrong. And if we know that a family of experiments will be repeated many times, creating a seam and reusable verification can remove a lot of repeated work.</p>
+<p>Finally, our boundaries are not sacred. If the business or research evolves in a way that no longer fits them, refactoring the boundary is part of good design.</p>
+</aside>
+</section><section class="slide" data-title="The value of these principles changes across AI-coding stages">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">07 · AI-ASSISTED CODING</div><div class="num">29 / 34</div></div>
+<h1>The value of these principles changes across AI-coding stages</h1>
+<div class="content">
+<div class="stage-row"><div class="ai-stage"><b>Stage 1</b><span class="stage-name">Human coding</span><div class="stage-details"><div>Coding: 100% human</div><div>Review &amp; signoff: human</div></div></div><div class="ai-stage active"><b>Stage 2</b><span class="stage-name">AI-assisted coding</span><div class="stage-details"><div>Coding: ~20–30% AI-assisted</div><div>Review: ~70% fully human</div><div>Remaining review: AI-assisted + human signoff</div></div></div><div class="ai-stage"><b>Stage 3</b><span class="stage-name">AI coding + mixed review</span><div class="stage-details"><div>Coding: 100% AI</div><div>Review: ~30% fully human</div><div>~70% AI review + human signoff</div></div></div><div class="ai-stage"><b>Stage 4</b><span class="stage-name">Fully agentic coding &amp; review</span><div class="stage-details"><div>Coding: 100% AI</div><div>Review &amp; signoff: 100% AI</div><div>Human role: mainly UAT / business oversight</div></div></div></div>
+<div class="takeaway">Stages 3–4 are future maturity scenarios: each step assumes AI capability, system stability and testing maturity have advanced enough to support it safely.</div>
+<div class="question">Which stage best describes the way we work today?</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>I would begin the AI section by asking the audience to locate themselves on this progression. These percentages are illustrative stage definitions for this talk, not measurements of the industry.</p><p>Stage 1 is fully human coding, review and approval. In Stage 2, AI contributes perhaps twenty to thirty percent of implementation; most review remains fully human, while a smaller share may already be AI-assisted with human signoff. Stage 3 is a future scenario in which AI writes the code, around thirty percent of review is still fully human, and the majority is AI review with human signoff. Stage 4 is the further scenario in which coding, review and signoff are agentic, with people mainly participating through UAT and business oversight.</p><p>The important premise is that we only move stages when model capability, system stability and testing maturity justify it. The rest of the section asks what value our design principles provide once each stage is safe, rather than using today's AI limitations to argue for architecture.</p></aside>
+</section><section class="slide" data-title="Stages 1–2: reduce implementation and understanding cost">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">07 · AI-ASSISTED CODING</div><div class="num">30 / 34</div></div>
+<h1>Stages 1–2: reduce implementation and understanding cost</h1>
+<div class="content">
+<div class="two-cols">
+<div class="card"><div class="label">STAGE 1 · HUMAN CODING</div><div class="card-title">Make the next change easier to implement</div><p>Clear seams reduce the amount of system a developer must understand and modify for each experiment.</p></div>
+<div class="card"><div class="label">STAGE 2 · AI-ASSISTED CODING</div><div class="card-title">Make generated change easier to understand</div><p>Review can focus on the business change and evidence rather than reconstructing arbitrary implementation context.</p></div>
+</div>
+<div class="takeaway">The architecture turns a code change into a bounded business change.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>In Stage 1, the benefits are familiar: people can make changes without repeatedly rebuilding their understanding of the whole graph. Stable definitions also make handover and review easier.</p><p>In Stage 2, a new value becomes more important. A person may review code they did not write. A well-defined boundary lets us describe the AI-generated change in business terms: what operation changed, what contract remained the same, what state it owns and what evidence supports the change.</p><p>The value is not merely fewer files. A two-line change can be dangerous if it changes a business meaning; a large mechanical refactor can be straightforward if semantics are preserved. The architecture gives us a better unit for understanding the change.</p></aside>
+</section><section class="slide" data-title="Stage 3: reusable tests support greater agent autonomy">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">07 · AI-ASSISTED CODING</div><div class="num">31 / 34</div></div>
+<h1>Stage 3: reusable tests support greater agent autonomy</h1>
+<div class="content">
+<div class="three-cols">
+<div class="card"><div class="card-title">Independent variants</div><p>Agents can implement multiple alternatives behind the same seam.</p></div>
+<div class="card"><div class="card-title">Reusable verification</div><p>Contract tests and simulator setup provide repeated evidence across compatible variants.</p></div>
+<div class="card"><div class="card-title">Focused signoff</div><p>Human attention can shift towards business intent, exceptions and evidence.</p></div>
+</div>
+<div class="takeaway">Stable boundaries make automated implementation and review easier to scale without re-inventing the testing problem each time.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>At Stage 3 we assume AI is capable enough to implement reliably and that our testing environment is mature enough to support mixed review.</p><p>This is where stable seams and reusable tests become an important scaling mechanism. Multiple agents can independently build variants behind the same boundary. The contract tests, simulator configuration and system regression provide a common validation basis. Human signoff can therefore focus more on business intent, unusual risks and the evidence that the experiment produced.</p><p>The point is not that AI needs simpler code. The point is that a well-structured experimental surface reduces unnecessary integration and makes verification reusable across more work.</p></aside>
+</section><section class="slide" data-title="Stage 4: architecture becomes infrastructure for controlled experimentation">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">07 · AI-ASSISTED CODING</div><div class="num">32 / 34</div></div>
+<h1>Stage 4: architecture becomes infrastructure for controlled experimentation</h1>
+<div class="content">
+<div class="four-values">
+<div class="value"><b>Control what varies</b><span>stable seams isolate the business decision being tested</span></div>
+<div class="value"><b>Hold the comparison basis steady</b><span>common definitions, event semantics and simulator conditions</span></div>
+<div class="value"><b>Compare results more cleanly</b><span>differences are easier to relate to the intended workflow change</span></div>
+<div class="value"><b>Accumulate reusable knowledge</b><span>future experiments can build on definitions, operations, evidence and prior outcomes</span></div>
+</div>
+<div class="takeaway">At full agentic maturity, the value shifts from helping people manage code to helping the business run better controlled, more cumulative research.</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>Stage 4 is the most interesting long-term scenario. We assume coding, review and signoff are reliably agentic. Human code-reading cost is no longer the main justification for architecture.</p><p>The value becomes experimental structure. Stable seams help the system control what varies. Stable business definitions give experiments a common semantic basis. Reusable simulator and contract tests make the evidence more comparable. The result is not automatically statistically valid—multiple testing and out-of-sample discipline still matter—but the software system can support cleaner controlled comparisons.</p><p>Over time, the system can accumulate reusable business capabilities and research knowledge rather than only generating more independent implementations. That is a deeper value than coding speed.</p></aside>
+</section><section class="slide" data-title="Designing for change sustains research agility">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">CONCLUSION</div><div class="num">33 / 34</div></div>
+<h1>Designing for change sustains research agility</h1>
+<div class="content">
+<div class="four-values conclusion">
+<div class="value"><b>Keep likely changes local</b><span>Information Hiding · Protected Variations · Seams</span></div>
+<div class="value"><b>Understand and model the business deliberately</b><span>deep domain understanding · simplify historical fragmentation where justified · preserve real business distinctions</span></div>
+<div class="value"><b>Design testability into the architecture</b><span>reusable contracts · simulator · regression</span></div>
+<div class="value"><b>Improve the design as we deliver</b><span>evolutionary design · proportionate judgement</span></div>
+</div>
+<div class="closing">Good architecture is not the objective. <b>Sustained, risk-controlled research agility is.</b></div>
+</div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden="">
+<p>Let me finish where we started. In systematic trading, we cannot know in advance which research ideas will succeed. What we can build is the capability to keep trying good ideas, test them reliably, learn from the evidence and move successful ideas towards production without rebuilding the system every time.</p>
+<p>The first principle is to keep likely changes local. Use dependable seams around technical components and business operations that we expect to vary repeatedly.</p>
+<p>The second is broader than simply making software fit today's business terminology. We need to understand the business deeply enough to model its underlying concepts and operations. Sometimes that means faithfully preserving a real distinction. Sometimes it means recognising that today's taxonomy is the product of staged, organic development and can be simplified after a first-principles review. We must not simplify by cutting business corners; the software should remain true to the business we actually intend to operate.</p>
+<p>Third, treat testability as an architectural property. Stable boundaries give us reusable contracts and a production-faithful simulator gives us repeatable evidence about the combined workflow.</p>
+<p>And fourth, improving the design is part of delivery. The boundaries and business models we choose are not permanent truths; they should evolve as we learn, with proportionate engineering judgement.</p>
+<p>As AI takes on more coding and review, these ideas move from helping people manage implementation complexity towards supporting automated, controlled and cumulative experimentation.</p>
+<p>Good architecture is not the objective. Sustained research agility is.</p>
+</aside>
+</section><section class="slide" data-title="References and further reading">
+<div class="slide-inner">
+<div class="slide-header"><div class="section">REFERENCES</div><div class="num">34 / 34</div></div>
+<h1>References and further reading</h1>
+<div class="content">
+<div class="refs">
+<p><b>D. L. Parnas</b> — Information Hiding, “On the Criteria To Be Used in Decomposing Systems into Modules” (1972)</p>
+<p><b>D. L. Parnas</b> — Program Families, “On the Design and Development of Program Families” (1976)</p>
+<p><b>Kent Beck</b> — <i>Extreme Programming Explained</i> (1999)</p>
+<p><b>Martin Fowler</b> — “Is Design Dead?” / Evolutionary Design (2000); Design Stamina Hypothesis (2007)</p>
+<p><b>Craig Larman</b> — Protected Variations (2001)</p>
+<p><b>Eric Evans</b> — <i>Domain-Driven Design</i>: Ubiquitous Language, Bounded Context (2003)</p>
+<p><b>Michael Feathers</b> — <i>Working Effectively with Legacy Code</i>: Seams (2004)</p>
+<p><b>Alistair Cockburn</b> — Hexagonal Architecture / Ports &amp; Adapters (2005)</p>
+<p><b>NASA / ESA / SEC</b> — Mars Climate Orbiter, Ariane 5 Flight 501, Knight Capital incident reports</p>
+</div></div>
+<div class="footer-line"></div>
+</div>
+<aside class="speaker-notes" hidden=""><p>These are the main intellectual and incident references behind the talk. I would not expect the audience to read them in advance; they are here for anyone who wants to trace the ideas back to original or well-established sources.</p><p>The purpose of the references is not to claim that our quant architecture must copy any one methodology. It is to show that the recurring problem—how to change a system without making every change affect everything else—has been approached from several directions over decades.</p><p>Our contribution is to apply those ideas to the repeated experimentation, event-driven workflows, simulation and increasingly AI-assisted development of systematic trading.</p></aside>
+</section></div><aside class="notes-pane"><div class="notes-head"><b></b></div><div class="notes-body"></div></aside></div>
+<div class="overview"><button class="btn" id="closeOv">Close overview</button><div class="overview-grid"></div></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let active=0;
+const stage=document.querySelector('.stage'), notesPane=document.querySelector('.notes-pane'), notesBody=document.querySelector('.notes-body'), notesTitle=document.querySelector('.notes-head b');
+function show(i){active=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,j)=>s.classList.toggle('active',j===active));document.getElementById('count').textContent=`${active+1} / ${slides.length}`;notesTitle.textContent=slides[active].dataset.title;notesBody.innerHTML=slides[active].querySelector('.speaker-notes').innerHTML;location.hash='slide-'+(active+1);}
+document.getElementById('prev').onclick=()=>show(active-1);document.getElementById('next').onclick=()=>show(active+1);document.getElementById('notes').onclick=()=>document.body.classList.toggle('show-notes');document.getElementById('overviewBtn').onclick=()=>document.querySelector('.overview').classList.add('open');document.getElementById('closeOv').onclick=()=>document.querySelector('.overview').classList.remove('open');
+document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(active+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(active-1)}if(e.key==='n')document.body.classList.toggle('show-notes')});
+const grid=document.querySelector('.overview-grid');slides.forEach((s,i)=>{const d=document.createElement('div');d.className='ov';d.innerHTML=`<b>${i+1}. ${s.dataset.title}</b>`;d.onclick=()=>{document.querySelector('.overview').classList.remove('open');show(i)};grid.appendChild(d)});
+let hash=parseInt((location.hash.match(/slide-(\d+)/)||[])[1]||'1',10)-1;show(hash);
+</script></body></html>
